@@ -210,6 +210,7 @@ function renderOwnedIndustries() {
               <!-- ② Controles de contratación -->
               <div class="hire-controls">
                 ${[5,10,50,100,500,1000].map(n=>`
+                  <button class="fire-btn" data-fire="${n}">-${n}</button>
                   <button class="hire-btn" data-hire="${n}">+${n}</button>
                 `).join('')}
               </div>
@@ -232,6 +233,15 @@ function renderOwnedIndustries() {
         const extra = parseInt(btn.dataset.hire, 10);
         industry.production.currentEmployees += extra;
         updateUI();               // refresca todos los números
+      });
+    });
+    card.querySelectorAll('.fire-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const remove = parseInt(btn.dataset.fire, 10);
+        const base   = industry.production.employees;
+        industry.production.currentEmployees =
+          Math.max(base, industry.production.currentEmployees - remove);
+        updateUI();
       });
     });
 
