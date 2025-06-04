@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Industrial 1980</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    </head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+  <h1 class="game-title">
+    ARGENTINA TYCOON 2025
+  </h1>
+  <button id="nextWeek" class="button pulse">► Siguiente Semana</button>
+  <button id="audioToggle" class="audio-btn" title="Música ON/OFF">
+  <i class="fas fa-volume-xmark"></i>   <!-- empieza en silencio -->
+</button>
+<audio id="bgMusic" src="assets/sound/soundtrack1.mp3" loop preload="auto"></audio>
+  <div class="game-stats">
+    <div class="stat">
+      <i class="fas fa-coins"></i>
+      <span class="stat-label">Dinero</span>
+      <span id="money" class="stat-value">$1 000 000</span>
+    </div>
+
+    <div class="stat">
+      <i class="fas fa-calendar-alt"></i>
+      <span class="stat-label">Fecha</span>
+      <span id="date" class="stat-value">Enero 1980</span>
+    </div>
+
+    <div class="stat">
+      <i class="fas fa-arrow-up-right-dots"></i>
+      <span class="stat-label">Ingreso / sem</span>
+      <span id="weeklyIncome" class="stat-value">$0</span>
+    </div>
+
+    <div class="stat">
+      <i class="fas fa-chart-line"></i>
+      <span class="stat-label">Ingreso / mes</span>
+      <span id="monthlyIncome" class="stat-value">$0</span>
+    </div>
+  </div>
+</header>
+
+
+    <main class="game-main">
+      <nav class="panel-nav">
+  <button class="panel-button active" data-panel="industries">
+    <i class="fas fa-industry"></i><span> Industrias</span>
+  </button>
+
+  <button class="panel-button" data-panel="owned">
+    <i class="fas fa-warehouse"></i><span> Mis Industrias</span>
+  </button>
+
+  <button class="panel-button" data-panel="storage">
+    <i class="fas fa-boxes-stacked"></i><span> Almacén</span>
+  </button>
+
+  <button class="panel-button" data-panel="history">
+    <i class="fas fa-chart-line"></i><span> Historial</span>
+  </button>
+
+  <button class="panel-button" data-panel="loans">
+    <i class="fas fa-hand-holding-dollar"></i><span> Préstamos</span>
+  </button>
+</nav>
+
+
+      <div class="panels-container">
+        <section id="industries-panel" class="panel active">
+          <h2>Industrias Disponibles</h2>
+          <div id="industriesList" class="industries-grid"></div>
+        </section>
+
+        <section id="owned-panel" class="panel">
+          <h2>Mis Industrias</h2>
+          <div id="ownedIndustries" class="industries-grid"></div>
+        </section>
+
+        <section id="storage-panel" class="panel">
+          <h2>Almacén</h2>
+          <div id="storage" class="storage-container"></div>
+        </section>
+
+        <section id="history-panel" class="panel">
+          <h2>Historial de Ventas</h2>
+          <ul id="historyList"></ul>
+        </section>
+
+        <section id="loans-panel" class="panel">
+          <h2>Préstamo Internacional</h2>
+          <div id="loanOptions"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de venta -->
+  <div id="saleModal" class="modal hidden">
+    <div class="modal-content">
+      <h3> 🧾 - Comunicado Oficial - 🧾</h3>
+      <div id="saleDetails"></div>
+      <button id="closeModal" class="button">Cerrar</button>
+    </div>
+  </div>
+  <!-- ───────── Modal: conversación con el dueño ───────── -->
+<div id="lenderModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="lenderClose" class="close">&times;</span>
+
+    <img id="lenderImg"  class="lender-img"   src="" alt="Dueño del lender">
+    <h3  id="lenderName" class="lender-name"></h3>
+
+    <!-- El audio se carga y se reproduce una vez al abrir el modal -->
+    <audio id="lenderAudio"></audio>
+  </div>
+</div>
+
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>

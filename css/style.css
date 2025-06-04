@@ -1,0 +1,609 @@
+:root {
+    /* Paleta metalizada oscura */
+    --primary-color: #2A2F3A;        /* Gris acero oscuro */
+    --secondary-color: #1C1F24;      /* Gunmetal aún más oscuro */
+    --accent-color: #AFAFAF;         /* Plata cepillada */
+    --text-color: #E0E0E0;           /* Plata clara */
+    --background-color: #14171A;     /* Carbón profundo */
+    --card-background: rgba(20, 23, 26, 0.6); /* Translúcido para vidrio metálico */
+    --success-color: #3A7D44;        /* Verde acero */
+    --error-color: #9E2A2B;          /* Rojo oxidado */
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --hover-shadow-color: rgba(0, 0, 0, 0.9);
+    --glass-effect: rgba(255, 255, 255, 0.05);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.02em;
+    /* Fondo con imagen y gradiente combinado */
+    background:
+        
+        url('../assets/img/background.png'); /* Poné la ruta correcta de tu imagen */
+    background-size: cover; /* Ajusta la imagen al tamaño de la ventana */
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
+    min-height: 100vh;
+}
+.game-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(0.8rem, 1.2vw + .4rem, 1.2rem);
+  letter-spacing: .05em;
+  color: #1EF1F1;
+  text-shadow:
+    0 0 4px #1EF1F1,
+    0 0 8px #1EF1F1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Header */
+.game-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 2rem;
+
+  background: rgba(20, 25, 30, 0.6);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0,255,255,0.15);
+  box-shadow:
+    0 0 12px rgba(0,255,255,0.08),
+    0 0 24px rgba(0,255,255,0.06),
+    inset 0 0 4px rgba(0,255,255,0.12);
+  border-radius: 12px;
+}
+
+
+.game-stats {
+    display: flex;
+    gap: 24px;
+}
+
+/* Tarjeta de stat */
+.stat {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(0,255,255,0.25);
+  box-shadow: inset 0 0 6px rgba(0,255,255,0.1);
+  border-radius: 8px;
+  padding: .75rem .9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+
+  font-family: 'Press Start 2P', monospace;
+  font-size: .55rem;
+  color: #C9F8F8;
+}
+
+.stat i {
+  font-size: .9rem;
+  color: #1EF1F1;
+  filter: drop-shadow(0 0 3px #1EF1F1);
+  margin-bottom: .25rem;
+}
+
+.stat-label {
+  opacity: .8;
+}
+
+.stat-value {
+  font-size: .75rem;
+  color: #ffffff;
+}
+
+/* Buttons */
+.button {
+    background: linear-gradient(
+        135deg,
+        var(--accent-color) 0%,
+        #D4D4D4 50%,
+        var(--accent-color) 100%
+    );
+    color: var(--primary-color);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow:
+        0 4px 16px var(--shadow-color),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 24px var(--hover-shadow-color),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.button:disabled {
+    background: #555;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Percent buttons */
+.percent-button {
+    padding: 6px 12px;
+    font-size: 0.8em;
+    border-radius: 6px;
+    background: linear-gradient(
+        135deg,
+        var(--accent-color) 0%,
+        #D4D4D4 50%,
+        var(--accent-color) 100%
+    );
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--secondary-color);
+}
+
+.percent-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--hover-shadow-color);
+}
+
+/* Panel Navigation */
+.panel-nav {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.panel-button {
+    background: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    flex: 1;
+    transition: background 0.2s ease;
+}
+
+.panel-button:hover {
+    background: var(--secondary-color);
+}
+
+.panel-button.active {
+    background: var(--primary-color);
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+/* Panels */
+.panels-container {
+    min-height: 600px;
+    position: relative;
+}
+
+.panel {
+    background: var(--card-background);
+    padding: 24px;
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow:
+        0 8px 32px var(--shadow-color);
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.panel.active {
+    display: block;
+}
+
+h2 {
+    color: var(--accent-color);
+    margin-bottom: 16px;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-shadow: 0 0 4px rgba(255,255,255,0.1);
+}
+
+/* Grids */
+.industries-grid,
+.storage-container {
+    display: grid;
+    gap: 20px;
+}
+
+.industries-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.storage-container {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* Cards */
+.industry-card,
+.storage-item {
+    background: var(--card-background);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-image: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.05) 0%,
+        rgba(0,0,0,0.2) 100%
+    ) 1;
+    box-shadow:
+        0 8px 32px var(--shadow-color),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card:hover,
+.storage-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 40px var(--hover-shadow-color);
+}
+
+.industry-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.industry-name,
+.storage-item h3 {
+    color: var(--accent-color);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.industry-description {
+    color: rgba(224,224,224,0.85);
+    font-size: 0.95em;
+}
+
+.industry-price {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* Financial blocks */
+.industry-financials {
+    background: var(--glass-effect);
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.industry-income {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.industry-employees {
+    color: var(--accent-color);
+}
+
+.industry-salary {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+.industry-net {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 8px;
+    font-weight: 700;
+}
+
+/* Sell controls */
+.sell-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.sell-controls input {
+    flex: 1 1 100%;
+    order: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 8px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* Buttons inside sell-controls reuse percent-button and button styles */
+.sell-controls .percent-button {
+    flex: 1 1 48%;
+    order: 2;
+}
+
+.sell-controls .sell-button {
+    flex: 1 1 100%;
+    order: 3;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 1em;
+    color: var(--secondary-color);
+}
+
+/* Variation text */
+.price-up {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.price-down {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13, 15, 16, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--card-background);
+    padding: 24px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Flags */
+.modal-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.modal-flag .flag-img {
+    width: 32px;
+    height: auto;
+    border-radius: 2px;
+    margin-right: 8px;
+}
+
+.flag-img {
+    width: 30px;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.flag-img-large {
+    width: 48px;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+/* Lenders list */
+.lenders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.lender-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.lender-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Loan request & history */
+.loan-request .loan-input-group {
+    display: flex;
+    gap: .5rem;
+    margin: .5rem 0;
+}
+
+.loan-request select,
+.loan-request input {
+    flex: 1;
+    padding: .5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.loan-history ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.loan-history li {
+    margin-bottom: .75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: .5rem;
+}
+
+/* Storage items */
+.storage-item img.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+.audio-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: #1EF1F1;
+  cursor: pointer;
+  padding: .5rem;
+  filter: drop-shadow(0 0 3px #1EF1F1);
+  transition: transform .15s ease;
+}
+.audio-btn:hover   { transform: scale(1.1); }
+.audio-btn:active  { transform: scale(1.0); }
+.audio-btn .fa-volume-xmark { opacity: .7; }
+
+.lender-img  { 
+  width: 100%;
+  max-height: 370px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.lender-name { 
+  font-size: 1.1rem; 
+  margin-bottom: .75rem;
+  color: var(--accent-color);
+}
+.close {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-size: 1.6rem;
+  color: var(--error-color);
+  cursor: pointer;
+  transition: transform .15s;
+}
+.close:hover { transform: scale(1.1); }
+.talk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+
+  font-family: 'Press Start 2P', monospace;
+  font-size: .7rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+
+  padding: .75rem 1.1rem;
+  border: 1px solid rgba(0,255,255,.25);
+  border-radius: 10px;
+
+  background: linear-gradient(
+               145deg,
+               rgba(0,255,255,.15) 0%,
+               rgba(0,255,255,.05) 50%,
+               rgba(0,255,255,.18) 100%);
+  box-shadow:
+    0 0 8px rgba(0,255,255,.18),
+    inset 0 0 4px rgba(0,255,255,.25);
+
+  color: #C9F8F8;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+.talk-btn i {
+  font-size: 1.1rem;
+  color: #1EF1F1;
+  filter: drop-shadow(0 0 4px #1EF1F1);
+  transition: transform .15s ease;
+}
+
+/* Hover / Focus */
+.talk-btn:hover,
+.talk-btn:focus-visible {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 6px 18px rgba(0,255,255,.30),
+    inset 0 0 6px rgba(0,255,255,.35);
+}
+
+.talk-btn:hover i,
+.talk-btn:focus-visible i {
+  transform: scale(1.15) rotate(-8deg);
+}
+
+/* Active (click) */
+.talk-btn:active {
+  transform: translateY(0) scale(.98);
+  box-shadow:
+    0 4px 12px rgba(0,255,255,.20),
+    inset 0 0 4px rgba(0,255,255,.30);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .industries-grid,
+    .storage-container {
+        grid-template-columns: 1fr;
+    }
+    .game-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .stat {
+        min-width: 140px;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .industry-card:hover,
+    .storage-item:hover,
+    .button:hover {
+        transform: none;
+        animation: none;
+    }
+}
